@@ -17,7 +17,7 @@ from streamlit_folium import st_folium
 
 
 ROOT = Path(__file__).resolve().parent
-DATA_PATH = ROOT / "data" / "road_segments_slim.gpkg"
+DATA_PATH = ROOT / "production_data" / "road_segments_slim.gpkg"
 MODEL_PATHS = {
     "Bicycle–bicycle crash": ROOT / "models" / "final_best_model_B.pkl",
     "Bicycle–vehicle crash": ROOT / "models" / "final_best_model_V.pkl",
