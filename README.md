@@ -24,7 +24,7 @@ add the same TOML entry there. Do not put the key in `app.py` or commit the
 
 The app expects these existing files:
 
-- `data/road_segments_with_predictions.gpkg`
+- `prodcution_data/road_segments_slim.gpkg`
 - `models/final_best_model_B.pkl`
 - `models/final_best_model_V.pkl`
 
