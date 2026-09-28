@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
 import branca.colormap as cm
 import folium
@@ -276,6 +277,25 @@ def color_scale(values: pd.Series, palette_name: str, caption: str):
     return scale, low, high
 
 
+def map_tiles() -> tuple[str, str]:
+    try:
+        carto_api_key = st.secrets.get("CARTO_API_KEY", "")
+    except (FileNotFoundError, KeyError):
+        carto_api_key = ""
+    if not carto_api_key:
+        return "OpenStreetMap", "© OpenStreetMap contributors"
+    tile_url = (
+        "https://basemaps.cartocdn.com/rastertiles/positron/"
+        "{z}/{x}/{y}{r}.png?key="
+        f"{quote(str(carto_api_key), safe='')}"
+    )
+    return tile_url, (
+        '© <a href="https://www.openstreetmap.org/copyright">'
+        "OpenStreetMap contributors</a>, "
+        '<a href="https://carto.com/attribution/">CARTO</a>'
+    )
+
+
 def make_map(
     roads_map: gpd.GeoDataFrame,
     layer_label: str,
@@ -300,10 +320,12 @@ def make_map(
             (selected_bounds[0] + selected_bounds[2]) / 2,
         ]
         initial_zoom = 16
+    tiles, attribution = map_tiles()
     road_map = folium.Map(
         location=center,
         zoom_start=initial_zoom,
-        tiles="CartoDB positron",
+        tiles=tiles,
+        attr=attribution,
         prefer_canvas=True,
         control_scale=True,
     )

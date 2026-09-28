@@ -9,6 +9,19 @@ python -m pip install -r requirements.txt
 streamlit run app.py
 ```
 
+## CARTO basemap key
+
+The app reads `CARTO_API_KEY` from Streamlit secrets. For local development,
+create `.streamlit/secrets.toml`:
+
+```toml
+CARTO_API_KEY = "paste-your-key-here"
+```
+
+On Streamlit Community Cloud, open the app settings, choose **Secrets**, and
+add the same TOML entry there. Do not put the key in `app.py` or commit the
+`secrets.toml` file. Without a key, the app falls back to OpenStreetMap tiles.
+
 The app expects these existing files:
 
 - `data/road_segments_with_predictions.gpkg`
