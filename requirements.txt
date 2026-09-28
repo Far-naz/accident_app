@@ -1,0 +1,11 @@
+streamlit>=1.50
+streamlit-folium>=0.22
+folium>=0.17
+branca>=0.7
+geopandas>=1.0
+pandas>=2.0
+numpy>=1.26
+xgboost>=2.1
+scikit-learn>=1.4
+joblib>=1.4
+plotly>=5.20
